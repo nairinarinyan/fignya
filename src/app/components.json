@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Input",
+    "path": "./components/input/input"
+  },
+  {
+    "name": "Button",
+    "path": "./components/button/button"
+  }
+]

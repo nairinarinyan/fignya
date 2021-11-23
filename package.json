@@ -1,0 +1,31 @@
+{
+  "name": "fignya",
+  "version": "0.0.1",
+  "description": "React component library builder",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w"
+  },
+  "bin": {
+    "fignya": "dist/bin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nairinarinyan/fignya.git"
+  },
+  "keywords": [
+    "react",
+    "component-library"
+  ],
+  "author": "Nairi Narinyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nairinarinyan/fignya/issues"
+  },
+  "homepage": "https://github.com/nairinarinyan/fignya#readme",
+  "devDependencies": {
+    "@types/node": "^16.11.9",
+    "typescript": "^4.5.2"
+  }
+}
