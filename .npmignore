@@ -1,5 +1,6 @@
-src
 tsconfig.json
 node_modules
 app_source/dist
 app_source/public
+.parcel-cache
+/src
