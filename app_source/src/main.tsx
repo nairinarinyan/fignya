@@ -1,6 +1,5 @@
 import { Component, FC, lazy, LazyExoticComponent, Suspense, useState } from 'react';
 import { render } from 'react-dom';
-import componentData  from '../components.json';
 import { navigate, useLocation } from './router/router';
 
 // __COMPONENT_INCLUDES_START__

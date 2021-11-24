@@ -1,6 +1,8 @@
 import { stat, mkdir, writeFile } from 'fs/promises';
+import { join } from 'path';
+import { Config } from './types';
 
-const componentDir = './src/app/src/components/';
+// const componentDir = './src/app_root/src/components/';
 
 const compSrc = (name: string, rawName: string) => `
 import { FC } from 'react';
@@ -13,21 +15,22 @@ type Props = {
 export const ${name}: FC<Props> = props => {
   return (
     <div className="${rawName}">
+      ${name}
     </div>
   );
 };
 `;
 
-export const component = async (args: string[]) => {
+export const component = async (args: string[], config: Config) => {
   const [rawName] = args;
 
   if (!rawName) {
     return console.warn('Name is required');
   }
 
-  const compDir = componentDir + rawName;
-  const compPath = compDir + '/' + rawName + '.tsx';
-  const stylePath = compDir + '/' + rawName + '.css';
+  const compDir = join(config.componentRoot, rawName);
+  const compPath = join(compDir, rawName + '.tsx');
+  const stylePath = join(compDir, rawName + '.css');
 
   try {
     await stat(compDir);

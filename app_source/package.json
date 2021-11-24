@@ -1,0 +1,40 @@
+{
+  "name": "app_name_",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "targets": {
+    "designer": {
+      "source": "./index.html",
+      "distDir": "public",
+      "isLibrary": false
+    },
+    "library": {
+      "source": "./index.ts",
+      "distDir": "dist",
+      "isLibrary": true,
+      "outputFormat": "commonjs"
+    }
+  },
+  "scripts": {
+    "start": "fignya run && parcel --target designer --dist-dir public",
+    "build": "parcel build --no-cache --target library && npm run declarations",
+    "declarations": "tsc index.ts --jsx react-jsx --declaration --emitDeclarationOnly --esModuleInterop --outDir dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.36",
+    "@types/react-dom": "^17.0.11",
+    "autoprefixer": "^10.4.0",
+    "parcel": "^2.0.1",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.5.2"
+  }
+}
