@@ -3,3 +3,4 @@ dist
 *.js
 *.d.ts
 .parcel-cache
+.DS_Store
