@@ -10,7 +10,7 @@
       "isLibrary": false
     },
     "library": {
-      "source": "./index.ts",
+      "source": "./components.ts",
       "distDir": "dist",
       "isLibrary": true,
       "outputFormat": "commonjs"
@@ -19,7 +19,7 @@
   "scripts": {
     "start": "fignya run && parcel --target designer --dist-dir public",
     "build": "parcel build --no-cache --target library && npm run declarations",
-    "declarations": "tsc index.ts --jsx react-jsx --declaration --emitDeclarationOnly --esModuleInterop --outDir dist"
+    "declarations": "tsc components.ts --jsx react-jsx --declaration --emitDeclarationOnly --esModuleInterop --outDir dist"
   },
   "keywords": [],
   "author": "",

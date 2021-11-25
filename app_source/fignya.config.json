@@ -1,4 +1,5 @@
 {
   "name": "app_name_",
-  "componentRoot": "src/components"
+  "componentsRoot": "src/components",
+  "viewsRoot": "src/views"
 }

@@ -1,6 +1,7 @@
 export type UserConfig = {
   name: string;
-  componentRoot: string;
+  componentsRoot: string;
+  viewsRoot: string;
 };
 
 export type Config = UserConfig & {

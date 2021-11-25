@@ -950,21 +950,28 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactDom = require("react-dom");
 var _tailwindCss = require("tailwindcss/tailwind.css");
 var _router = require("./router/router");
-var _index = require("../index");
-var _browser = require("./fignya-components/browser/browser");
+var _components = require("../components");
+var _views = require("../views");
+var _browser = require("./fignya-components/browser");
 var _stylesCss = require("./styles.css");
+var _configurator = require("./fignya-components/configurator");
 var _s = $RefreshSig$();
 const App = ()=>{
     _s();
-    const [selectedComp, setSelectedComp] = _react.useState();
+    const [selectedCompName, setSelectedComp] = _react.useState();
     _router.useLocation((path)=>{
         setSelectedComp(path.replace(/^\//, ''));
     });
+    const SelectedComp = _react.useMemo(()=>{
+        return _components[selectedCompName] || _views[selectedCompName];
+    }, [
+        selectedCompName
+    ]);
     return(/*#__PURE__*/ _jsxRuntime.jsxs("main", {
         className: "h-full flex",
         __source: {
             fileName: "app_source/src/main.tsx",
-            lineNumber: 19,
+            lineNumber: 26,
             columnNumber: 5
         },
         __self: undefined,
@@ -973,38 +980,65 @@ const App = ()=>{
                 className: "w-1/5",
                 __source: {
                     fileName: "app_source/src/main.tsx",
-                    lineNumber: 20,
+                    lineNumber: 27,
                     columnNumber: 7
                 },
                 __self: undefined,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_browser.Browser, {
-                    components: _index,
-                    selectedComp: selectedComp,
+                    components: _components,
+                    views: _views,
+                    selectedComp: selectedCompName,
                     onSelect: _router.navigate,
                     __source: {
                         fileName: "app_source/src/main.tsx",
-                        lineNumber: 21,
+                        lineNumber: 28,
                         columnNumber: 9
                     },
                     __self: undefined
                 })
             }),
-            /*#__PURE__*/ _jsxRuntime.jsx("section", {
-                className: "border-l flex-1 flex justify-center items-center",
+            /*#__PURE__*/ _jsxRuntime.jsxs("section", {
+                className: "border-l flex-1 flex flex-col ",
                 __source: {
                     fileName: "app_source/src/main.tsx",
-                    lineNumber: 27,
+                    lineNumber: 35,
                     columnNumber: 7
                 },
                 __self: undefined,
-                children: _index[selectedComp] && _index[selectedComp]({
-                    value: 'something'
-                })
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "flex-1 flex justify-center items-center",
+                        __source: {
+                            fileName: "app_source/src/main.tsx",
+                            lineNumber: 36,
+                            columnNumber: 9
+                        },
+                        __self: undefined,
+                        children: SelectedComp && /*#__PURE__*/ _jsxRuntime.jsx(SelectedComp, {
+                            ...SelectedComp.defaultProps,
+                            __source: {
+                                fileName: "app_source/src/main.tsx",
+                                lineNumber: 38,
+                                columnNumber: 13
+                            },
+                            __self: undefined
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_configurator.Configurator, {
+                        component: SelectedComp,
+                        __source: {
+                            fileName: "app_source/src/main.tsx",
+                            lineNumber: 41,
+                            columnNumber: 9
+                        },
+                        __self: undefined
+                    })
+                ]
             })
         ]
     }));
 };
-_s(App, "778yVduJtPpfZSOszMp6ham/fUE=", false, function() {
+_s(App, "Kv5VGiC/q703tFsVSUJNHJNturI=", false, function() {
     return [
         _router.useLocation
     ];
@@ -1013,7 +1047,7 @@ _c = App;
 _reactDom.render(/*#__PURE__*/ _jsxRuntime.jsx(App, {
     __source: {
         fileName: "app_source/src/main.tsx",
-        lineNumber: 37,
+        lineNumber: 50,
         columnNumber: 3
     },
     __self: undefined
@@ -1026,7 +1060,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"hNZpQ","react":"a8JGm","react-dom":"ffGiB","./router/router":"9yzkl","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3IKxk","./styles.css":"3OhbJ","tailwindcss/tailwind.css":"gmHwo","../index":"c5lBA","./fignya-components/browser/browser":"8tLZy","@parcel/transformer-js/src/esmodule-helpers.js":"abow6"}],"hNZpQ":[function(require,module,exports) {
+},{"react/jsx-runtime":"hNZpQ","react":"a8JGm","react-dom":"ffGiB","./router/router":"9yzkl","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3IKxk","./styles.css":"3OhbJ","tailwindcss/tailwind.css":"gmHwo","@parcel/transformer-js/src/esmodule-helpers.js":"abow6","../components":"j8O61","../views":"9rVDA","./fignya-components/browser":"fYZVJ","./fignya-components/configurator":"aIPXw"}],"hNZpQ":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -22977,7 +23011,7 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"c043L"}],"3OhbJ":[function() {},{}],"gmHwo":[function() {},{}],"c5lBA":[function(require,module,exports) {
+},{"react-refresh/runtime":"c043L"}],"3OhbJ":[function() {},{}],"gmHwo":[function() {},{}],"j8O61":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Button", ()=>_button.Button
@@ -23000,19 +23034,22 @@ parcelHelpers.export(exports, "Button", ()=>Button
 );
 var _jsxRuntime = require("react/jsx-runtime");
 var _buttonCss = require("./button.css");
-const Button = (props)=>{
+const Button = ({ fluid , text  })=>{
     return(/*#__PURE__*/ _jsxRuntime.jsx("button", {
-        className: "text-white bg-pink-600 rounded-md px-6 py-2",
+        className: `text-white bg-pink-600 rounded-md px-6 py-2 ${fluid && 'w-full'}`,
         __source: {
             fileName: "app_source/src/components/button/button.tsx",
-            lineNumber: 10,
+            lineNumber: 12,
             columnNumber: 5
         },
         __self: undefined,
-        children: "Press me"
+        children: text
     }));
 };
 _c = Button;
+Button.defaultProps = {
+    text: 'Press me'
+};
 var _c;
 $RefreshReg$(_c, "Button");
 
@@ -23033,35 +23070,35 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Input", ()=>Input
 );
 var _jsxRuntime = require("react/jsx-runtime");
-const Input = (props)=>{
+const Input = ({ label , placeholder  })=>{
     return(/*#__PURE__*/ _jsxRuntime.jsxs("label", {
         htmlFor: "input",
         className: "flex flex-col",
         __source: {
             fileName: "app_source/src/components/input/input.tsx",
-            lineNumber: 8,
+            lineNumber: 10,
             columnNumber: 5
         },
         __self: undefined,
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+            label && /*#__PURE__*/ _jsxRuntime.jsx("span", {
                 className: "mb-2 text-gray-700",
                 __source: {
                     fileName: "app_source/src/components/input/input.tsx",
-                    lineNumber: 9,
-                    columnNumber: 7
+                    lineNumber: 12,
+                    columnNumber: 9
                 },
                 __self: undefined,
-                children: "Label"
+                children: label
             }),
             /*#__PURE__*/ _jsxRuntime.jsx("input", {
                 id: "input",
                 type: "text",
-                placeholder: "Input",
+                placeholder: placeholder,
                 className: "ring-2 px-4 py-2 rounded-md",
                 __source: {
                     fileName: "app_source/src/components/input/input.tsx",
-                    lineNumber: 10,
+                    lineNumber: 14,
                     columnNumber: 7
                 },
                 __self: undefined
@@ -23070,6 +23107,10 @@ const Input = (props)=>{
     }));
 };
 _c = Input;
+Input.defaultProps = {
+    label: 'SomeLabel',
+    placeholder: 'Placeholder'
+};
 var _c;
 $RefreshReg$(_c, "Input");
 
@@ -23078,11 +23119,112 @@ $RefreshReg$(_c, "Input");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"hNZpQ","@parcel/transformer-js/src/esmodule-helpers.js":"abow6","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3IKxk"}],"8tLZy":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$3771 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-runtime":"hNZpQ","@parcel/transformer-js/src/esmodule-helpers.js":"abow6","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3IKxk"}],"9rVDA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "InputButton", ()=>_inputButton.InputButton
+);
+var _inputButton = require("./src/views/input-button/input-button");
+
+},{"./src/views/input-button/input-button":"gu6rn","@parcel/transformer-js/src/esmodule-helpers.js":"abow6"}],"gu6rn":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$2b0f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$3771.prelude(module);
+$parcel$ReactRefreshHelpers$2b0f.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "InputButton", ()=>InputButton
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _input = require("../../components/input/input");
+var _button = require("../../components/button/button");
+const InputButton = (props)=>{
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+        className: "",
+        __source: {
+            fileName: "app_source/src/views/input-button/input-button.tsx",
+            lineNumber: 10,
+            columnNumber: 5
+        },
+        __self: undefined,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                className: "text-2xl mb-8",
+                __source: {
+                    fileName: "app_source/src/views/input-button/input-button.tsx",
+                    lineNumber: 11,
+                    columnNumber: 7
+                },
+                __self: undefined,
+                children: "Input and Button sample view"
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                className: "mb-4",
+                __source: {
+                    fileName: "app_source/src/views/input-button/input-button.tsx",
+                    lineNumber: 12,
+                    columnNumber: 7
+                },
+                __self: undefined,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_input.Input, {
+                    label: "Email",
+                    placeholder: "your@email.com",
+                    __source: {
+                        fileName: "app_source/src/views/input-button/input-button.tsx",
+                        lineNumber: 13,
+                        columnNumber: 9
+                    },
+                    __self: undefined
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                className: "mb-4",
+                __source: {
+                    fileName: "app_source/src/views/input-button/input-button.tsx",
+                    lineNumber: 18,
+                    columnNumber: 7
+                },
+                __self: undefined,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_input.Input, {
+                    label: "Password",
+                    placeholder: "Your pa$$w0rd",
+                    __source: {
+                        fileName: "app_source/src/views/input-button/input-button.tsx",
+                        lineNumber: 19,
+                        columnNumber: 9
+                    },
+                    __self: undefined
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_button.Button, {
+                fluid: true,
+                __source: {
+                    fileName: "app_source/src/views/input-button/input-button.tsx",
+                    lineNumber: 24,
+                    columnNumber: 7
+                },
+                __self: undefined,
+                children: "Login"
+            })
+        ]
+    }));
+};
+_c = InputButton;
+var _c;
+$RefreshReg$(_c, "InputButton");
+
+  $parcel$ReactRefreshHelpers$2b0f.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"hNZpQ","../../components/input/input":"d0bFl","../../components/button/button":"kBsIW","@parcel/transformer-js/src/esmodule-helpers.js":"abow6","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3IKxk"}],"fYZVJ":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$6a55 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$6a55.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -23090,58 +23232,40 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Browser", ()=>Browser
 );
 var _jsxRuntime = require("react/jsx-runtime");
-const Browser = ({ components , selectedComp , onSelect  })=>{
+var _compList = require("./comp-list");
+const Browser = ({ components , views , selectedComp , onSelect  })=>{
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
-        className: "",
+        className: "pt-12",
         __source: {
-            fileName: "app_source/src/fignya-components/browser/browser.tsx",
-            lineNumber: 14,
+            fileName: "app_source/src/fignya-components/browser.tsx",
+            lineNumber: 16,
             columnNumber: 5
         },
         __self: undefined,
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                className: "py-12 px-4",
+            /*#__PURE__*/ _jsxRuntime.jsx(_compList.CompList, {
+                name: "Components",
+                components: components,
+                onSelect: onSelect,
+                selectedComp: selectedComp,
                 __source: {
-                    fileName: "app_source/src/fignya-components/browser/browser.tsx",
-                    lineNumber: 15,
+                    fileName: "app_source/src/fignya-components/browser.tsx",
+                    lineNumber: 17,
                     columnNumber: 7
                 },
-                __self: undefined,
-                children: /*#__PURE__*/ _jsxRuntime.jsx("h1", {
-                    className: "text-xl",
-                    __source: {
-                        fileName: "app_source/src/fignya-components/browser/browser.tsx",
-                        lineNumber: 16,
-                        columnNumber: 9
-                    },
-                    __self: undefined,
-                    children: "Components"
-                })
+                __self: undefined
             }),
-            /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                className: "p-2 border-t",
+            /*#__PURE__*/ _jsxRuntime.jsx(_compList.CompList, {
+                name: "Views",
+                components: views,
+                onSelect: onSelect,
+                selectedComp: selectedComp,
                 __source: {
-                    fileName: "app_source/src/fignya-components/browser/browser.tsx",
-                    lineNumber: 18,
+                    fileName: "app_source/src/fignya-components/browser.tsx",
+                    lineNumber: 23,
                     columnNumber: 7
                 },
-                __self: undefined,
-                children: Object.keys(components).map((name)=>{
-                    const isSelected = name === selectedComp;
-                    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: `py-2 px-4 mb-2 rounded-md hover:bg-blue-50 cursor-pointer ${isSelected && 'bg-blue-50'}`,
-                        onClick: ()=>onSelect(name)
-                        ,
-                        __source: {
-                            fileName: "app_source/src/fignya-components/browser/browser.tsx",
-                            lineNumber: 23,
-                            columnNumber: 13
-                        },
-                        __self: undefined,
-                        children: name
-                    }, name));
-                })
+                __self: undefined
             })
         ]
     }));
@@ -23150,7 +23274,108 @@ _c = Browser;
 var _c;
 $RefreshReg$(_c, "Browser");
 
-  $parcel$ReactRefreshHelpers$3771.postlude(module);
+  $parcel$ReactRefreshHelpers$6a55.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"hNZpQ","./comp-list":"bYrnM","@parcel/transformer-js/src/esmodule-helpers.js":"abow6","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3IKxk"}],"bYrnM":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$fd5c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$fd5c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CompList", ()=>CompList
+);
+var _jsxRuntime = require("react/jsx-runtime");
+const CompList = ({ name: name1 , components , selectedComp , onSelect  })=>{
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+        className: "p-2 border-t",
+        __source: {
+            fileName: "app_source/src/fignya-components/comp-list.tsx",
+            lineNumber: 13,
+            columnNumber: 5
+        },
+        __self: undefined,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                className: "text-lg mx-4 mt-2 mb-4 font-semibold",
+                __source: {
+                    fileName: "app_source/src/fignya-components/comp-list.tsx",
+                    lineNumber: 14,
+                    columnNumber: 7
+                },
+                __self: undefined,
+                children: name1
+            }),
+            Object.keys(components).map((name)=>{
+                const isSelected = name === selectedComp;
+                return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+                    className: `py-2 px-4 mb-2 rounded-md text-sm hover:bg-blue-50 cursor-pointer ${isSelected && 'bg-blue-50'}`,
+                    onClick: ()=>onSelect(name)
+                    ,
+                    __source: {
+                        fileName: "app_source/src/fignya-components/comp-list.tsx",
+                        lineNumber: 19,
+                        columnNumber: 11
+                    },
+                    __self: undefined,
+                    children: name
+                }, name));
+            })
+        ]
+    }));
+};
+_c = CompList;
+var _c;
+$RefreshReg$(_c, "CompList");
+
+  $parcel$ReactRefreshHelpers$fd5c.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"hNZpQ","@parcel/transformer-js/src/esmodule-helpers.js":"abow6","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3IKxk"}],"aIPXw":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$44d5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$44d5.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Configurator", ()=>Configurator
+);
+var _jsxRuntime = require("react/jsx-runtime");
+const Configurator = (props)=>{
+    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+        className: "border-t h-1/3 w-full",
+        __source: {
+            fileName: "app_source/src/fignya-components/configurator.tsx",
+            lineNumber: 9,
+            columnNumber: 5
+        },
+        __self: undefined,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+            className: "text-lg mx-4 mt-2 mb-4 font-semibold",
+            __source: {
+                fileName: "app_source/src/fignya-components/configurator.tsx",
+                lineNumber: 10,
+                columnNumber: 7
+            },
+            __self: undefined,
+            children: "Props"
+        })
+    }));
+};
+_c = Configurator;
+var _c;
+$RefreshReg$(_c, "Configurator");
+
+  $parcel$ReactRefreshHelpers$44d5.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;

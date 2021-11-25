@@ -28,7 +28,7 @@ export const component = async (args: string[], config: Config) => {
     return console.warn('Name is required');
   }
 
-  const compDir = join(config.componentRoot, rawName);
+  const compDir = join(config.projectRoot, config.componentsRoot, rawName);
   const compPath = join(compDir, rawName + '.tsx');
   const stylePath = join(compDir, rawName + '.css');
 

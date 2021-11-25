@@ -36,7 +36,8 @@ const start = async () => {
 
   const config: Config = {
     name: '',
-    componentRoot: '',
+    componentsRoot: '',
+    viewsRoot: '',
     projectRoot: process.cwd(),
   };
 
@@ -55,7 +56,9 @@ const start = async () => {
 
   try {
     const userConfig = JSON.parse(await readFile(configPath, { encoding: 'utf-8' })) as UserConfig;
-    userConfig.componentRoot = join(config.projectRoot, userConfig.componentRoot);
+    // userConfig.componentsRoot = join(config.projectRoot, userConfig.componentsRoot);
+    // userConfig.viewsRoot = join(config.projectRoot, userConfig.viewsRoot);
+
     Object.assign(config, userConfig);
   } catch (err) {
     console.warn('User config not found');
