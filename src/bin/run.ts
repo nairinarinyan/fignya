@@ -33,28 +33,28 @@ export const run = async (args: string[], config: Config) => {
       .map(part => part[0].toUpperCase() + part.slice(1))
       .join('');
     
-    const importSt = generateImport(path, name);
+    // const importSt = generateImport(path, name);
     const exportSt = generateExport(pathForEntry, name);
 
-    return { rawName, name, path, importSt, exportSt };
+    return { rawName, name, path, exportSt };
   });
 
-  const imports = compData.map(d => d.importSt).join('\n');
+  // const imports = compData.map(d => d.importSt).join('\n');
   const exports = compData.map(d => d.exportSt).join('\n');
-  const keyValues = compData.map(d => `'${d.rawName}': ${d.name}`).join(', ')
-  const compMap = `const components = { ${keyValues} }`;
+  // const keyValues = compData.map(d => `'${d.rawName}': ${d.name}`).join(', ')
+  // const compMap = `const components = { ${keyValues} }`;
 
-  const include = `${imports}\n\n${compMap}`;
+  // const include = `${imports}\n\n${compMap}`;
 
 
 // const mainFilePath = './src/app_root/src/main.tsx';
-  const mainFilePath = join(config.projectRoot, 'src/main.tsx')
+  // const mainFilePath = join(config.projectRoot, 'src/main.tsx')
   const entryFilePath = join(config.projectRoot, 'index.ts')
 
-  const mainFileSrc = await readFile(mainFilePath, { encoding: 'utf-8' });
-  const newMainSrc = mainFileSrc.replace(regex, include);
+  // const mainFileSrc = await readFile(mainFilePath, { encoding: 'utf-8' });
+  // const newMainSrc = mainFileSrc.replace(regex, include);
 
-  writeFile(mainFilePath, newMainSrc);
+  // writeFile(mainFilePath, newMainSrc);
   writeFile(entryFilePath, exports);
 
   // console.log(regex);

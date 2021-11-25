@@ -1,53 +1,35 @@
-import { Component, FC, lazy, LazyExoticComponent, Suspense, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { render } from 'react-dom';
+import 'tailwindcss/tailwind.css';
 import { navigate, useLocation } from './router/router';
+import * as components from '../index';
 
-// __COMPONENT_INCLUDES_START__
-const components = {};
-// __COMPONENT_INCLUDES_END__
+import { Browser } from './fignya-components/browser/browser';
 
-// import Input from  './components/input/input';
-// import Button from './components/button/button';
-
-// const components = {
-//   input: Input,
-//   button: Button,
-// };
-
-type ComponentData = {
-  name: string;
-  path: string;
-};
+import './styles.css';
 
 const App: FC = () => {
-  const [compName, setCompName] = useState<string>();
+  const [selectedComp, setSelectedComp] = useState<string>();
 
-  useLocation((path, comp) => {
-    setCompName(path.replace(/^\//, ''));
+  useLocation((path) => {
+    setSelectedComp(path.replace(/^\//, ''));
   });
 
-  const navigateTo = (path: string) => {
-    navigate(path);
-  };
-
   return (
-    <div>
-      <aside>
-        <h1>Components</h1>
-        {Object.keys(components).map(rawName => {
-          return (
-            <button key={rawName} onClick={() => navigateTo(rawName)}>
-              {rawName}
-            </button>
-          );
-        })}
+    <main className="h-full flex">
+      <aside className="w-1/5">
+        <Browser
+          components={components}
+          selectedComp={selectedComp}
+          onSelect={navigate}
+        />
       </aside>
-      <main className="border">
-        {components[compName] &&
-          components[compName]({ value: 'something' })
+      <section className="border-l flex-1 flex justify-center items-center">
+        {components[selectedComp] &&
+          components[selectedComp]({ value: 'something' })
         }
-      </main>
-    </div>
+      </section>
+    </main>
   );
 };
 

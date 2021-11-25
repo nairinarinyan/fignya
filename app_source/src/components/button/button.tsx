@@ -7,8 +7,8 @@ type Props = {
 
 export const Button: FC<Props> = props => {
   return (
-    <div className="mld-input">
-      <button>can't confirm that yo</button>
-    </div>
+    <button className="text-white bg-pink-600 rounded-md px-6 py-2">
+      Press me
+    </button>
   );
 };
